@@ -813,13 +813,13 @@
                                     </div>
                                 </div>
 
-                                <div class="row">
+                                <!-- <div class="row">
                                     <div class="form-item  col-12 padd-15">
                                         <div class="form-group">
                                             <input type="text" id="contact" class="form-control" placeholder="Mobile:">
                                         </div>
                                     </div>
-                                </div>
+                                </div> -->
 
 
                                 <div class="row">
@@ -855,7 +855,7 @@
         </div>
         </section>
 
-        <!-- Contact section start end -->
+        <!-- Contact section  end -->
 
     </div>
     </div>
@@ -871,12 +871,11 @@
 
     <script src="./javascript/styleswitch.js"></script>
 
-
     <script src="https://smtpjs.com/v3/smtp.js"></script>
 
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
-    <script>
+    <!-- <script>
         function SendEmail() {
 
 
@@ -921,12 +920,77 @@
 
         }
 
+    </script> -->
+
+    <script>
+        function SendEmail() {
+            let name = document.getElementById("name").value;
+            let email = document.getElementById("email").value;
+            let contact = document.getElementById("contact").value;
+            let subject = document.getElementById("subject").value;
+            let message = document.getElementById("message").value;
+
+            // Check if any required field is empty
+            if (name === "") {
+                document.getElementById("name").placeholder = "This field is required";
+                return;
+            }
+
+            if (email === "") {
+                document.getElementById("email").placeholder = "This field is required";
+                return;
+            }
+
+            // if (contact === "") {
+            //     document.getElementById("contact").placeholder = "This field is required";
+            //     return;
+            // }
+
+            if (subject === "") {
+                document.getElementById("subject").placeholder = "This field is required";
+                return;
+            }
+
+            if (message === "") {
+                document.getElementById("message").placeholder = "This field is required";
+                return;
+            }
 
 
+            // let body = "Name:" + name + "<br/> Email:" + email + "<br/> Contact:" + contact + "<br/> Subject:" + subject + "<br/> Messages:" + message;
+            let body = "Name:" + name + "<br/> Email:" + email + "<br/> Subject:" + subject + "<br/> Messages:" + message;
 
 
+            Email.send({
+                SecureToken: "cc46e7ee-af51-4a54-b7bc-a143cf9f4f5a",
+                To: 'officialritik177@gmail.com',
+                From: "officialritik177@gmail.com",
+                // Contact: contact,
+                Subject: subject,
+                Body: body
+            }).then(
+                message => {
+                    if (message === 'OK') {
+                        // Reset the input fields 
+                        document.getElementById("name").value = "";
+                        document.getElementById("email").value = "";
+                        // document.getElementById("contact").value = "";
+                        document.getElementById("subject").value = "";
+                        document.getElementById("message").value = "";
+
+                        swal("Successful!", "Your data successfully received!", "success");
+                    } else {
+                        swal("Something is wrong!", "Your data is not received!", "error");
+                    }
+                }
+            );
+        }
 
     </script>
+
+
+
+
 
 </body>
 
